@@ -1,36 +1,30 @@
-import Apartment from "../../schemas/Apartment.js";
+import User from "../../schemas/User.js";
 import { isValidId } from "../../utils/validate.js";
 import { InvalidIdError, NotFoundError } from "../../constants/apiResponses.js";
 
 const update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { number, floor, square, price, status, description, clients } = req.body;
+        const { firstName, lastName, surName, phone, email } = req.body;
 
         if (!isValidId(id)) {
             return res.status(400).json({ error: InvalidIdError });
         }
 
-        const updatedApartment = await Apartment.findByIdAndUpdate(
+        const updatedManager = await User.findByIdAndUpdate(
             id,
             {
                 $set: {
-                    number,
-                    floor,
-                    square,
-                    price,
-                    status,
-                    description,
-                    clients,
+                    firstName, lastName, surName, phone, email
                 },
             },
             { new: true },
         );
 
-        if (!updatedApartment) {
+        if (!updatedManager) {
             return res.status(404).json({ error: NotFoundError });
         }
-        return res.status(201).json({ data: updatedApartment })
+        return res.status(201).json({ data: updatedManager })
     } catch (err) {
         console.log('Error:', err);
         return res.status(500).json({ error: InternalServerError });
