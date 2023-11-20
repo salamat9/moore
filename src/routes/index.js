@@ -1,10 +1,13 @@
 import express from 'express';
-import ApartmentRoutes from './apartments.js'
-import ManagerRoutes from './managers.js'
+import authenticate from '../middlewares/auth.js';
+import ApartmentRoutes from './apartments.js';
+import ManagerRoutes from './managers.js';
+import AuthRoutes from './auth.js'
 
 const router = express.Router();
 
-router.use('/apartments', ApartmentRoutes);
-router.use('/managers', ManagerRoutes);
+router.use('/apartments', authenticate, ApartmentRoutes);
+router.use('/managers', authenticate, ManagerRoutes);
+router.use('/auth', AuthRoutes);
 
 export default router;

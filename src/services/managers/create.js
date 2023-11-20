@@ -3,7 +3,15 @@ import { InternalServerError } from "../../constants/apiResponses.js";
 
 const create = async (req, res) => {
     try {
-        const newManager = new User(req.body)
+        const { email, password } = req.body;
+        const isTakenEmail = await User.findOne({ email });
+        
+        if (isTakenEmail) 
+            return res.status(400).json({ email: "Email already taken!"});
+        
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);    
+        const newManager = new User({ email, password: hashedPassword });
         const savedManager = await newManager.save();
         
         res.status(201).json(savedManager);
