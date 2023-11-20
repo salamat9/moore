@@ -1,5 +1,5 @@
-import { InternalServerError } from "../../constants/apiResponses.js";
 import Apartment from "../../schemas/Apartment.js";
+import { InternalServerError, NotFoundError } from "../../constants/apiResponses.js";
 
 const get = async (req, res) => {
     try {
@@ -11,7 +11,7 @@ const get = async (req, res) => {
         const apartments = await Apartment.find(filter);
 
         if (!apartments.length) 
-            return res.status(404).json({ message: '' })
+            return res.status(404).json({ message: NotFoundError })
         
         return res.status(200).json({ data: apartments });
     } catch (err) {

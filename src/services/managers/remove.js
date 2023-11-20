@@ -1,4 +1,4 @@
-import Apartment from "../../schemas/Apartment.js";
+import User from "../../schemas/User.js";
 import { isValidId } from "../../utils/validate.js";
 import { InternalServerError, InvalidIdError, NotFoundError } from "../../constants/apiResponses.js";
 
@@ -10,9 +10,9 @@ const remove = async (req, res) => {
             return res.status(400).json({ error: InvalidIdError });
         }
 
-        const deletedApartment = await Apartment.findByIdAndDelete(id);
+        const deletedManager = await User.findByIdAndDelete(id);
 
-        if (!deletedApartment) {
+        if (!deletedManager) {
             return res.status(404).json({ error: NotFoundError });
         }
 
