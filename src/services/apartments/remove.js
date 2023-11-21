@@ -1,6 +1,6 @@
 import Apartment from "../../schemas/Apartment.js";
 import { isValidId } from "../../utils/validate.js";
-import { InternalServerError, InvalidIdError, NotFoundError } from "../../constants/apiResponses.js";
+import { InternalServerError, InvalidIdError, NotFoundError, SuccessDelete } from "../../constants/apiResponses.js";
 
 const remove = async (req, res) => {
     try {

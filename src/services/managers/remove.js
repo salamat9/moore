@@ -1,6 +1,6 @@
 import User from "../../schemas/User.js";
 import { isValidId } from "../../utils/validate.js";
-import { InternalServerError, InvalidIdError, NotFoundError } from "../../constants/apiResponses.js";
+import { InternalServerError, InvalidIdError, NotFoundError, SuccessDelete } from "../../constants/apiResponses.js";
 
 const remove = async (req, res) => {
     try {
