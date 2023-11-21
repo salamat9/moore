@@ -8,15 +8,15 @@ const get = async (req, res) => {
             roleName: 'Manager',
         };
 
-        if (lastName) filter.amountDeals = amountDeals;
-        if (lastName) filter.createdAt = createdAt;
+        if (amountDeals) filter.amountDeals = amountDeals;
+        if (createdAt) filter.createdAt = createdAt;
 
         const managers = await User.find(filter);
 
         if (!managers.length) 
             return res.status(404).json({ message: NotFoundError })
         
-        return res.status(200).json({ data: managers });
+        return res.status(200).json({ managers });
     } catch (err) {
         console.error('Error:', err);
         res.status(500).json({ error: InternalServerError }); 

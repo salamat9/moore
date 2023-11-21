@@ -1,4 +1,5 @@
 import User from '../../schemas/User.js';
+import bcrypt from 'bcrypt';
 import { InternalServerError } from "../../constants/apiResponses.js";
 
 const create = async (req, res) => {
@@ -11,7 +12,7 @@ const create = async (req, res) => {
         
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);    
-        const newManager = new User({ email, password: hashedPassword });
+        const newManager = new User({ email, password: hashedPassword, roleName: 'Manager' });
         const savedManager = await newManager.save();
         
         res.status(201).json(savedManager);
