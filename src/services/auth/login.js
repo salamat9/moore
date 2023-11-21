@@ -15,11 +15,16 @@ const login = async (req, res) => {
         if (isInvalidPassword)
             return res.status(401).json({ message: 'Невалидные данные!' })
 
+        const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_KEY, {
+            expiresIn: '7d',
+        })
+        user.refreshToken = refreshToken;
+        await user.save();
         const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
             expiresIn: '1 hour',
         });
 
-        return res.status(201).json({ accessToken })
+        return res.status(201).json({ accessToken, refreshToken })
     } catch (err) {
         return res.status(500).json({ message: InternalServerError});
     }

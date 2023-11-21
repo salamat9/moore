@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     },
     amountDeals: Number,
     roleName: String,
+    refreshToken: String,
 }, {
     timestamps: true,
 })
