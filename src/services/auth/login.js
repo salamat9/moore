@@ -6,7 +6,7 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        console.log('user', user)
+
         if (!user) 
             return res.status(404).json({ message: 'Пользователь не найден!' });
 
@@ -19,7 +19,7 @@ const login = async (req, res) => {
             expiresIn: '1 hour',
         });
 
-        return res.status(200).json({ accessToken })
+        return res.status(201).json({ accessToken })
     } catch (err) {
         return res.status(500).json({ message: InternalServerError});
     }
