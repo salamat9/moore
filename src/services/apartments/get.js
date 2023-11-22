@@ -8,10 +8,9 @@ const get = async (req, res) => {
 
         if (status) filter.status = status;
 
-        const apartments = await Apartment.find(filter);
-
+        const apartments = await Apartment.find(filter).populate('building', 'name').exec();
         if (!apartments.length) 
-            return res.status(404).json({ message: NotFoundError })
+            return res.status(404).json({ message: NotFoundError });
         
         return res.status(200).json({ apartments });
     } catch (err) {
