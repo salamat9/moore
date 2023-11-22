@@ -3,12 +3,14 @@ import { InternalServerError, NotFoundError } from "../../constants/apiResponses
 
 const get = async (req, res) => {
     try {
-        const { status } = req.query;
+        const { status, buildingId } = req.query;
         const filter = {};
 
         if (status) filter.status = status;
+        if (buildingId) filter.building = buildingId;
 
         const apartments = await Apartment.find(filter).populate('building', 'name').exec();
+        
         if (!apartments.length) 
             return res.status(404).json({ message: NotFoundError });
         

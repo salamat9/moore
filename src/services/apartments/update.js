@@ -5,7 +5,7 @@ import { InvalidIdError, NotFoundError } from "../../constants/apiResponses.js";
 const update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { number, floor, square, price, status, description, clients } = req.body;
+        const { number, floor, square, price, status, description, clients, building } = req.body;
 
         if (!isValidId(id)) {
             return res.status(400).json({ error: InvalidIdError });
@@ -22,6 +22,7 @@ const update = async (req, res) => {
                     status,
                     description,
                     clients,
+                    building,
                 },
             },
             { new: true },

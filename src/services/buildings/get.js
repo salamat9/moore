@@ -8,7 +8,7 @@ const get = async (req, res) => {
         if (!buildings.length)
             return res.status(404).json({ message: NotFoundError });
 
-        return res.status(200).json({ apartments });    
+        return res.status(200).json({ buildings });    
     } catch (err) {
         console.error('Error:', err);
         res.status(500).json({ error: InternalServerError });
