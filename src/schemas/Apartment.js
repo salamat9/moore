@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Building from './Building.js';
 
 const ApartmentSchema = new mongoose.Schema({
     number: {
@@ -27,7 +28,11 @@ const ApartmentSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
+    building: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Building,
+    },
 }, {
     timestamps: true,
 });
