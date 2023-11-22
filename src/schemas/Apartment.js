@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Building from './Building.js';
+import User from "./User.js"
 
 const ApartmentSchema = new mongoose.Schema({
     number: {
@@ -26,7 +27,7 @@ const ApartmentSchema = new mongoose.Schema({
     clients: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: User,
         }
     ],
     building: {

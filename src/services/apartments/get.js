@@ -9,7 +9,7 @@ const get = async (req, res) => {
         if (status) filter.status = status;
         if (buildingId) filter.building = buildingId;
 
-        const apartments = await Apartment.find(filter).populate('building', 'name').exec();
+        const apartments = await Apartment.find(filter).populate('building', 'name').populate('clients', 'firstName lastName').exec();
         
         if (!apartments.length) 
             return res.status(404).json({ message: NotFoundError });

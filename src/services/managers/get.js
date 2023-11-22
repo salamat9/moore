@@ -3,10 +3,10 @@ import { InternalServerError, NotFoundError } from "../../constants/apiResponses
 
 const get = async (req, res) => {
     try {
-        const { amountDeals, createdAt } = req.query;
-        const filter = {
-            roleName: 'Manager',
-        };
+        const { amountDeals, createdAt, roleName } = req.query;
+        const filter = {};
+
+        if (roleName) filter.roleName = roleName;
 
         if (amountDeals) filter.amountDeals = amountDeals;
         if (createdAt) filter.createdAt = createdAt;

@@ -1,6 +1,6 @@
 import Apartment from "../../schemas/Apartment.js";
 import { isValidId } from "../../utils/validate.js";
-import { InvalidIdError, NotFoundError } from "../../constants/apiResponses.js";
+import { InvalidIdError, NotFoundError, InternalServerError } from "../../constants/apiResponses.js";
 
 const update = async (req, res) => {
     try {
